@@ -36,7 +36,7 @@ class JasperClient:
             operationName="list")
         res = self.client.service.list(req)
         reports = []
-        for rd in ET.fromstring(res).findall('resourceDescriptor'):
+        for rd in ET.fromstring(res.encode('utf-8')).findall('resourceDescriptor'):
             if rd.get('wsType') == 'reportUnit':
                 report = {}
                 report['id'] = rd.get('uriString')
